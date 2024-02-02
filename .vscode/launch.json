@@ -1,0 +1,46 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gdb kernel debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "miDebuggerServerAddress": "127.0.0.1:1234",
+            "program": "kernel.bin",
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "logging": {
+                "engineLogging": false
+            },
+            "stopAtConnect": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/opt/homebrew/bin/x86_64-elf-gdb",
+            // "preLaunchTask": "build image",
+            "setupCommands": [
+                {
+                    "description": "debug info",
+                    "text": "add-symbol-file kernel.debug",
+                    "ignoreFailures": true
+                },
+            ]
+        },
+        {
+            "name": "lldb kenel debug",
+            "type": "lldb",
+            "request": "custom",
+            "breakpointMode": "file",
+            "initCommands": [
+                "command script import ~/coding/lldb/disass.py",
+                "setting set target.x86-disassembly-flavor intel",
+            ],
+            "targetCreateCommands": [
+                "target create --arch i386 kernel.bin",
+            ],
+            "processCreateCommands": [
+                "gdb-remote localhost:1234",
+            ],
+            // "preLaunchTask": "launch qemu",
+        },
+    ],
+}

@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "launch qemu",
+            "type": "shell",
+            "isBackground": true,
+            "command": "orb make image && echo Starting QEMU && qemu-system-i386 -drive format=raw,file=a.img,if=floppy -drive format=raw,file=80m.img,if=ide -boot a -s -S",
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^(Starting QEMU)",
+                    "line": 1
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^(Starting QEMU)",
+                    "endsPattern": "^(Starting QEMU)"
+                }
+            }
+        },
+        {
+            "label": "build image",
+            "type": "shell",
+            "command": "orb build image && x86_64-elf-objcopy --only-keep-debug kernel.bin kernel.debug && x86_64-elf-objcopy --strip-debug kernel.bin"
+        }
+    ]
+}

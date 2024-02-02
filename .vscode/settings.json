@@ -1,0 +1,14 @@
+{
+    "lldb.displayFormat": "auto",
+    "lldb.showDisassembly": "auto",
+    "lldb.dereferencePointers": true,
+    "lldb.consoleMode": "commands",
+    "files.associations": {
+        "__mutex_base": "c",
+        "atomic": "c",
+        "proc.h": "c",
+        "locale": "c",
+        "__config": "c",
+        "stdio.h": "c"
+    }
+}
